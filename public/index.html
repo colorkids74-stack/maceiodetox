@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maceió Detox — Planos de Marmita e Detox</title>
+<meta name="description" content="Planos de marmita fit e detox em Maceió. Escolha seu plano e peça pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .step-view { display: none; }
+  .step-view.active { display: flex; flex-direction: column; }
+
+  /* step 1: escolher tipo de plano */
+  .plano-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .plano-card {
+    background: var(--white);
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .plano-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+  }
+  .plano-card.selected {
+    border-color: var(--accent);
+    background: #EAF3E4;
+  }
+  .plano-card h3 {
+    font-family: var(--font-display);
+    color: var(--primary);
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+  }
+  .plano-card p {
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+  }
+  .plano-price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.3rem;
+  }
+
+  /* step 2: escolher marmitas */
+  .marmita-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .marmita-item {
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .marmita-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .marmita-info {
+    flex: 1;
+  }
+  .marmita-info h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .marmita-info p {
+    margin: 2px 0 0;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .marmita-addon {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .qty-badge {
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* step 3: extras (opcional) */
+  .extras-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .extra-item {
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .extra-item:hover {
+    border-color: var(--primary);
+  }
+  .extra-item.selected {
+    border-color: var(--accent);
+    background: #EAF3E4;
+  }
+  .extra-item input {
+    display: none;
+  }
+  .extra-item h4 {
+    margin: 0 0 4px;
+    font-size: 0.8rem;
+    color: var(--ink);
+  }
+  .extra-item p {
+    margin: 0;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+  }
+  .extra-price {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* step 4: resumo e checkout */
+  .order-summary {
+    background: var(--bg-alt);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin: 14px 0;
+    font-size: 0.85rem;
+  }
+  .order-summary h4 {
+    margin: 0 0 10px;
+    color: var(--primary);
+    font-family: var(--font-display);
+  }
+  .order-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .order-line:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  /* navigation */
+  .step-nav {
+    display: flex;
+    gap: 10px;
+    padding: 14px 0;
+  }
+  .btn-nav {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-back {
+    background: var(--line);
+    color: var(--ink);
+  }
+  .btn-next {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .btn-submit {
+    background: #25D366;
+    color: var(--white);
+    width: 100%;
+  }
+
+  @media (max-width: 720px) {
+    .extras-grid { grid-template-columns: 1fr; }
+    .plano-card h3 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="#" class="logo">Maceió <span>Detox</span></a>
+    <a href="admin.html" class="link-admin" style="font-size:0.8rem;color:var(--ink-soft);">Admin</a>
+  </div>
+</header>
+
+<main class="container" style="padding: 20px 0 80px;">
+  <!-- STEP 1: Escolher tipo de plano -->
+  <div class="step-view active" id="step1">
+    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Escolha seu plano</h2>
+    <p style="color: var(--ink-soft); margin: 0 0 20px;">Marmita Fit, Suco Detox ou Combos prontos</p>
+    
+    <div style="margin-bottom: 28px;">
+      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem;">Marmita Fit</h3>
+      <div class="plano-grid" id="planosPlanesMarmitas"></div>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem;">Suco Detox</h3>
+      <div class="plano-grid" id="planosPlanossucos"></div>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem;">Combos Prontos</h3>
+      <div class="plano-grid" id="planosPlanoscomobos"></div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-nav btn-next" id="btn-step1-next" disabled>Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Selecionar marmitas (se escolheu plano de marmita) -->
+  <div class="step-view" id="step2">
+    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Escolha seus pratos</h2>
+    <p style="color: var(--ink-soft); margin: 0 0 8px;">Selecione <span id="qty-needed">5</span> marmitas</p>
+    <div style="color: var(--accent); font-size: 0.85rem; margin-bottom: 14px;">Selecionadas: <span id="qty-selected">0</span></div>
+    
+    <div class="marmita-list" id="marminitasList"></div>
+
+    <div class="step-nav">
+      <button class="btn-nav btn-back" id="btn-step2-back">← Voltar</button>
+      <button class="btn-nav btn-next" id="btn-step2-next" disabled>Próximo →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Adicionar extras (opcional) -->
+  <div class="step-view" id="step3">
+    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Adicionar extras</h2>
+    <p style="color: var(--ink-soft); margin: 0 0 14px;">Opcional. Sucos, sobremesas, etc.</p>
+    
+    <div id="extrasContainer"></div>
+
+    <div class="step-nav">
+      <button class="btn-nav btn-back" id="btn-step3-back">← Voltar</button>
+      <button class="btn-nav btn-next" id="btn-step3-next">Revisar pedido →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Resumo e checkout -->
+  <div class="step-view" id="step4">
+    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Resumo do pedido</h2>
+    
+    <div class="order-summary" id="orderSummary"></div>
+
+    <form style="margin: 20px 0;">
+      <label style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; font-size: 0.85rem; font-weight: 600;">
+        Nome completo
+        <input type="text" id="custName" required style="border: 1.5px solid var(--line); border-radius: 10px; padding: 10px; font-size: 0.9rem;">
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; font-size: 0.85rem; font-weight: 600;">
+        Endereço de entrega
+        <textarea id="custAddress" rows="2" required style="border: 1.5px solid var(--line); border-radius: 10px; padding: 10px; font-size: 0.9rem;"></textarea>
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; font-size: 0.85rem; font-weight: 600;">
+        Forma de pagamento
+        <select id="custPayment" required style="border: 1.5px solid var(--line); border-radius: 10px; padding: 10px; font-size: 0.9rem;">
+          <option value="" disabled selected>Selecione</option>
+          <option value="Pix">Pix</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão na entrega">Cartão na entrega</option>
+        </select>
+      </label>
+      <div id="formError" style="color: var(--accent-dark); font-size: 0.8rem; margin-bottom: 12px; min-height: 16px;"></div>
+    </form>
+
+    <div class="step-nav">
+      <button class="btn-nav btn-back" id="btn-step4-back">← Voltar</button>
+      <button class="btn-submit" id="btn-submit-whatsapp">Enviar no WhatsApp</button>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer" style="margin-top: 40px;">
+  <div class="container">
+    <p style="margin: 0; opacity: 0.8; font-size: 0.85rem;">© 2026 Maceió Detox · Comida fresca, feita todo dia</p>
+  </div>
+</footer>
+
+<script src="js/new-flow.js"></script>
+</body>
+</html>

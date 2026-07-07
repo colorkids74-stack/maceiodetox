@@ -1,0 +1,166 @@
+/* ===================================================================
+   MACEIÓ DETOX — admin.css
+   Reaproveita os tokens de style.css (importado antes deste arquivo)
+=================================================================== */
+
+body { background: var(--bg-alt); }
+
+.admin-header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 20px 0;
+}
+.admin-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-header .logo { color: var(--white); font-size: 1.3rem; }
+.admin-header .logo span { color: var(--mango); }
+.admin-header a.back { font-size: 0.85rem; opacity: 0.8; }
+
+.admin-wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+
+.gate {
+  max-width: 380px;
+  margin: 90px auto;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.gate h2 { font-family: var(--font-display); color: var(--primary); margin-top: 0; }
+.gate p { font-size: 0.85rem; color: var(--ink-soft); }
+.gate input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  margin: 14px 0;
+  font-size: 0.95rem;
+}
+.gate .btn { width: 100%; justify-content: center; }
+.gate .gate-error { color: var(--accent-dark); font-size: 0.8rem; min-height: 18px; }
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  background: var(--white);
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.admin-toolbar .file-label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.admin-note {
+  background: #FFF6E8;
+  border: 1px solid var(--mango);
+  color: #6B4A0E;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  margin-bottom: 26px;
+  line-height: 1.5;
+}
+
+.admin-section {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.admin-section h3 {
+  font-family: var(--font-display);
+  color: var(--primary);
+  margin-top: 0;
+}
+
+.dish-row {
+  display: grid;
+  grid-template-columns: 70px 1.4fr 1fr 100px 100px auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.dish-row:last-child { border-bottom: none; }
+.dish-row .thumb-preview {
+  width: 56px; height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--bg-alt);
+}
+.dish-row .name { font-weight: 600; font-size: 0.9rem; }
+.dish-row .cat { font-size: 0.78rem; color: var(--ink-soft); }
+.dish-row .price { font-family: var(--font-mono); font-size: 0.85rem; }
+.row-actions { display: flex; gap: 8px; }
+.row-actions button {
+  border: none;
+  background: var(--bg-alt);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.78rem;
+}
+.row-actions button.danger { background: #FBE3DC; color: var(--accent-dark); }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-grid .full { grid-column: 1 / -1; }
+.form-grid label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+.image-preview {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background: var(--bg-alt);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  margin-top: 6px;
+}
+.image-preview img { width: 100%; height: 100%; object-fit: cover; }
+.form-actions { display: flex; gap: 12px; margin-top: 18px; }
+
+.download-bar {
+  position: sticky;
+  bottom: 20px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.download-bar p { margin: 0; font-size: 0.82rem; opacity: 0.85; max-width: 460px; }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maceió Detox — Painel Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .admin-gate { max-width: 340px; margin: 90px auto; background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); text-align: center; }
+  .admin-gate h2 { font-family: var(--font-display); color: var(--primary); margin-top: 0; }
+  .admin-gate input { width: 100%; padding: 10px; border-radius: 10px; border: 1.5px solid var(--line); margin: 10px 0; font-size: 0.9rem; }
+  .admin-gate button { width: 100%; padding: 12px; background: var(--primary); color: var(--white); border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 14px; }
+  .admin-gate button:hover { opacity: 0.9; }
+  .admin-gate .error { color: var(--accent-dark); font-size: 0.8rem; min-height: 16px; margin: 8px 0; }
+
+  .admin-app { display: none; }
+  .admin-header { background: var(--primary); color: var(--white); padding: 16px 0; margin-bottom: 20px; }
+  .admin-header h1 { margin: 0; font-family: var(--font-display); }
+  .admin-header a { color: var(--white); font-size: 0.85rem; opacity: 0.8; }
+
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab-btn { padding: 10px 16px; border: none; background: var(--bg-alt); border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+  .tab-btn.active { background: var(--primary); color: var(--white); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: flex; flex-direction: column; font-size: 0.8rem; font-weight: 600; gap: 4px; }
+  .form-group input, .form-group textarea, .form-group select { border: 1.5px solid var(--line); border-radius: 8px; padding: 8px; font-size: 0.9rem; }
+
+  .list-item { background: var(--white); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .list-item-info h4 { margin: 0; font-size: 0.9rem; }
+  .list-item-info p { margin: 2px 0 0; font-size: 0.75rem; color: var(--ink-soft); }
+  .list-item-actions { display: flex; gap: 6px; }
+  .list-item-actions button { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
+  .btn-edit { background: var(--primary); color: var(--white); }
+  .btn-delete { background: var(--accent); color: var(--white); }
+
+  .btn-save { width: 100%; padding: 12px; background: var(--accent); color: var(--white); border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="admin-gate" id="gate">
+  <h2>Painel Admin</h2>
+  <p style="color: var(--ink-soft); font-size: 0.85rem;">Maceió Detox</p>
+  <input type="password" id="gatePassword" placeholder="Senha" autofocus>
+  <button onclick="checkPassword()">Entrar</button>
+  <div class="error" id="gateError"></div>
+</div>
+
+<!-- APP -->
+<div class="admin-app" id="app">
+  <header class="admin-header">
+    <div class="container">
+      <h1>Maceió Detox Admin</h1>
+      <a href="new-index.html" style="display:block; margin-top:6px;">← Voltar para o site</a>
+    </div>
+  </header>
+
+  <main class="container" style="padding-bottom: 40px;">
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('loja')">Loja</button>
+      <button class="tab-btn" onclick="switchTab('planos')">Planos</button>
+      <button class="tab-btn" onclick="switchTab('marmitas')">Marmitas</button>
+      <button class="tab-btn" onclick="switchTab('extras')">Extras</button>
+    </div>
+
+    <!-- TAB: LOJA -->
+    <div class="tab-content active" id="tab-loja">
+      <h2>Dados da loja</h2>
+      <div class="form-group">
+        <label>Nome <input type="text" id="storeName"></label>
+      </div>
+      <div class="form-group">
+        <label>Slogan <input type="text" id="storeSlogan"></label>
+      </div>
+      <div class="form-group">
+        <label>WhatsApp <input type="text" id="storeWhatsapp" placeholder="558299999999"></label>
+      </div>
+      <div class="form-group">
+        <label>Endereço <input type="text" id="storeAddress"></label>
+      </div>
+      <div class="form-group">
+        <label>Horário <input type="text" id="storeHours"></label>
+      </div>
+      <button class="btn-save" onclick="saveStore()">Salvar</button>
+    </div>
+
+    <!-- TAB: PLANOS -->
+    <div class="tab-content" id="tab-planos">
+      <h2>Planos</h2>
+      <div id="planosList"></div>
+    </div>
+
+    <!-- TAB: MARMITAS -->
+    <div class="tab-content" id="tab-marmitas">
+      <h2>Marmitas</h2>
+      <button class="btn-save" style="background: var(--primary); margin-bottom: 14px;" onclick="openMarmitaForm()">+ Nova marmita</button>
+      <div id="marmiitasList"></div>
+      
+      <div id="marmiitaForm" style="display:none; background: var(--bg-alt); padding: 16px; border-radius: 10px; margin-top: 14px;">
+        <h3>Editar marmita</h3>
+        <div class="form-group"><label>Nome <input type="text" id="m-nome"></label></div>
+        <div class="form-group"><label>Descrição <textarea id="m-desc" rows="2"></textarea></label></div>
+        <div class="form-group"><label><input type="checkbox" id="m-gourmet"> Gourmet (peixe/camarão)</label></div>
+        <div class="form-group" id="m-preco-group" style="display:none;"><label>Preço adicional (R$) <input type="number" id="m-preco" step="0.10"></label></div>
+        <div class="form-group"><label>Foto <input type="file" id="m-foto" accept="image/*"></label></div>
+        <div class="form-group"><label>Tags (separadas por vírgula) <input type="text" id="m-tags"></label></div>
+        <button class="btn-save" onclick="saveMarmita()">Salvar</button>
+        <button style="width:100%;padding:10px;background:var(--line);border:none;border-radius:8px;margin-top:8px;cursor:pointer;" onclick="closeMarmitaForm()">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- TAB: EXTRAS -->
+    <div class="tab-content" id="tab-extras">
+      <h2>Extras</h2>
+      <div style="margin-bottom: 14px;">
+        <label>Tipo: <select id="extrasType" onchange="loadExtras()"><option value="sucos">Sucos</option><option value="sobremesas">Sobremesas</option></select></label>
+      </div>
+      <button class="btn-save" style="background: var(--primary); margin-bottom: 14px;" onclick="openExtraForm()">+ Novo extra</button>
+      <div id="extrasList"></div>
+      
+      <div id="extraForm" style="display:none; background: var(--bg-alt); padding: 16px; border-radius: 10px; margin-top: 14px;">
+        <h3>Editar extra</h3>
+        <div class="form-group"><label>Nome <input type="text" id="ex-nome"></label></div>
+        <div class="form-group"><label>Descrição <textarea id="ex-desc" rows="2"></textarea></label></div>
+        <div class="form-group"><label>Preço (R$) <input type="number" id="ex-preco" step="0.10"></label></div>
+        <div class="form-group"><label>Foto <input type="file" id="ex-foto" accept="image/*"></label></div>
+        <div class="form-group"><label>Tags <input type="text" id="ex-tags"></label></div>
+        <button class="btn-save" onclick="saveExtra()">Salvar</button>
+        <button style="width:100%;padding:10px;background:var(--line);border:none;border-radius:8px;margin-top:8px;cursor:pointer;" onclick="closeExtraForm()">Cancelar</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/admin-new.js"></script>
+</body>
+</html>
