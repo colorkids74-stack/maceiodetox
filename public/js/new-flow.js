@@ -316,8 +316,19 @@
   }
 
   // -------------------------------------------------------------------
-  // navegação
+  // navegação global
   // -------------------------------------------------------------------
+  window.startPlanos = function() {
+    document.getElementById("hero-section").classList.remove("active");
+    renderStep1();
+  };
+
+  window.goToHero = function() {
+    document.querySelectorAll(".step-view").forEach(s => s.classList.remove("active"));
+    document.getElementById("hero-section").classList.add("active");
+    window.scrollTo(0, 0);
+  };
+
   function nextStep() {
     const step1 = document.getElementById("step1");
     const step2 = document.getElementById("step2");

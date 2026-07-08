@@ -12,7 +12,32 @@
   .step-view { display: none; }
   .step-view.active { display: flex; flex-direction: column; }
 
-  /* step 1: escolher tipo de plano */
+  /* HERO SECTION — mantém o visual bonito */
+  .hero-detox {
+    padding: 60px 0 40px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero-detox h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    color: var(--primary);
+  }
+  .hero-detox h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-detox p {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin: 0 auto 28px;
+  }
+
+  /* STEP 1: escolher tipo de plano */
   .plano-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -53,7 +78,7 @@
     font-size: 1.3rem;
   }
 
-  /* step 2: escolher marmitas */
+  /* STEP 2: escolher marmitas */
   .marmita-list {
     display: flex;
     flex-direction: column;
@@ -94,19 +119,8 @@
     color: var(--accent);
     font-weight: 600;
   }
-  .qty-badge {
-    background: var(--accent);
-    color: var(--white);
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    display: grid;
-    place-items: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
 
-  /* step 3: extras (opcional) */
+  /* STEP 3: extras */
   .extras-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -149,7 +163,7 @@
     margin-top: 4px;
   }
 
-  /* step 4: resumo e checkout */
+  /* STEP 4: resumo */
   .order-summary {
     background: var(--bg-alt);
     border-radius: var(--radius);
@@ -208,11 +222,25 @@
     background: #25D366;
     color: var(--white);
     width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .step-section-title {
+    font-family: var(--font-display);
+    color: var(--primary);
+    margin: 20px 0 10px;
+    font-size: 1.6rem;
   }
 
   @media (max-width: 720px) {
     .extras-grid { grid-template-columns: 1fr; }
     .plano-card h3 { font-size: 1.2rem; }
+    .hero-detox { padding: 40px 0 30px; }
+    .hero-detox h1 { font-size: 2rem; }
   }
 </style>
 </head>
@@ -221,41 +249,49 @@
 <header class="site-header">
   <div class="container">
     <a href="#" class="logo">Maceió <span>Detox</span></a>
-    <a href="admin.html" class="link-admin" style="font-size:0.8rem;color:var(--ink-soft);">Admin</a>
+    <a href="admin.html" class="btn btn-primary" style="font-size:0.8rem;">Admin</a>
   </div>
 </header>
 
-<main class="container" style="padding: 20px 0 80px;">
+<main class="container" style="padding-bottom: 60px;">
+
+  <!-- HERO SECTION -->
+  <section class="hero-detox step-view active" id="hero-section">
+    <h1>Sabor de <em>verdade</em>,<br>leveza de verdade.</h1>
+    <p>Escolha um plano de marmita, suco ou combo detox. Selecione seus pratos e receba fresco em casa.</p>
+    <button class="btn btn-accent" onclick="startPlanos()" style="margin: 0 auto;">Escolher meu plano →</button>
+  </section>
+
   <!-- STEP 1: Escolher tipo de plano -->
-  <div class="step-view active" id="step1">
-    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Escolha seu plano</h2>
-    <p style="color: var(--ink-soft); margin: 0 0 20px;">Marmita Fit, Suco Detox ou Combos prontos</p>
+  <div class="step-view" id="step1">
+    <h2 class="step-section-title">Escolha seu plano</h2>
     
     <div style="margin-bottom: 28px;">
-      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem;">Marmita Fit</h3>
+      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.2rem;">🍱 Marmita Fit</h3>
       <div class="plano-grid" id="planosPlanesMarmitas"></div>
     </div>
 
     <div style="margin-bottom: 28px;">
-      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem;">Suco Detox</h3>
+      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.2rem;">🥤 Suco Detox</h3>
       <div class="plano-grid" id="planosPlanossucos"></div>
     </div>
 
     <div style="margin-bottom: 28px;">
-      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem;">Combos Prontos</h3>
+      <h3 style="color: var(--primary); margin: 0 0 12px; font-family: var(--font-display); font-size: 1.2rem;">💚 Combos Prontos</h3>
       <div class="plano-grid" id="planosPlanoscomobos"></div>
     </div>
 
     <div class="step-nav">
+      <button class="btn-nav btn-back" onclick="goToHero()">← Voltar</button>
       <button class="btn-nav btn-next" id="btn-step1-next" disabled>Continuar →</button>
     </div>
   </div>
 
-  <!-- STEP 2: Selecionar marmitas (se escolheu plano de marmita) -->
+  <!-- STEP 2: Selecionar marmitas -->
   <div class="step-view" id="step2">
-    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Escolha seus pratos</h2>
+    <h2 class="step-section-title">Escolha seus pratos</h2>
     <p style="color: var(--ink-soft); margin: 0 0 8px;">Selecione <span id="qty-needed">5</span> marmitas</p>
-    <div style="color: var(--accent); font-size: 0.85rem; margin-bottom: 14px;">Selecionadas: <span id="qty-selected">0</span></div>
+    <div style="color: var(--accent); font-size: 0.85rem; margin-bottom: 14px;">✓ Selecionadas: <span id="qty-selected">0</span></div>
     
     <div class="marmita-list" id="marminitasList"></div>
 
@@ -265,10 +301,10 @@
     </div>
   </div>
 
-  <!-- STEP 3: Adicionar extras (opcional) -->
+  <!-- STEP 3: Adicionar extras -->
   <div class="step-view" id="step3">
-    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Adicionar extras</h2>
-    <p style="color: var(--ink-soft); margin: 0 0 14px;">Opcional. Sucos, sobremesas, etc.</p>
+    <h2 class="step-section-title">Adicionar extras</h2>
+    <p style="color: var(--ink-soft); margin: 0 0 14px;">Opcional — sucos, sobremesas, etc.</p>
     
     <div id="extrasContainer"></div>
 
@@ -280,7 +316,7 @@
 
   <!-- STEP 4: Resumo e checkout -->
   <div class="step-view" id="step4">
-    <h2 style="font-family: var(--font-display); color: var(--primary); margin: 20px 0 10px; font-size: 1.8rem;">Resumo do pedido</h2>
+    <h2 class="step-section-title">Resumo do pedido</h2>
     
     <div class="order-summary" id="orderSummary"></div>
 
@@ -307,15 +343,18 @@
 
     <div class="step-nav">
       <button class="btn-nav btn-back" id="btn-step4-back">← Voltar</button>
-      <button class="btn-submit" id="btn-submit-whatsapp">Enviar no WhatsApp</button>
+      <button class="btn-submit" id="btn-submit-whatsapp">📲 Enviar no WhatsApp</button>
     </div>
   </div>
 
 </main>
 
-<footer class="site-footer" style="margin-top: 40px;">
+<footer class="site-footer" style="margin-top: 60px;">
   <div class="container">
-    <p style="margin: 0; opacity: 0.8; font-size: 0.85rem;">© 2026 Maceió Detox · Comida fresca, feita todo dia</p>
+    <div style="text-align: center;">
+      <p style="margin: 0; opacity: 0.9; font-size: 0.85rem;">© 2026 Maceió Detox</p>
+      <p style="margin: 4px 0 0; opacity: 0.8; font-size: 0.75rem;">Comida fresca, feita todo dia</p>
+    </div>
   </div>
 </footer>
 

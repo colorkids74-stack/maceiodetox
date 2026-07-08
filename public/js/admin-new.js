@@ -1,6 +1,5 @@
 /* ===================================================================
-   admin-new.js — Painel administrativo para gerenciar planos,
-   marmitas e extras. Comunica com a API do servidor.
+   admin-new.js — Painel administrativo funcional
 =================================================================== */
 
 const API = "/api";
@@ -115,14 +114,14 @@ async function saveStore() {
 // ============================================================
 function loadPlanos() {
   const { marmitas, sucos, combos } = currentData.planos;
-  let html = "<h3>Marmitas</h3>";
+  let html = "<h3 style='color: var(--primary); margin: 20px 0 10px;'>Marmitas</h3>";
 
   marmitas.forEach(p => {
     html += `
       <div class="list-item">
         <div class="list-item-info">
           <h4>${p.nome}</h4>
-          <p>${p.quantidade} marmitas — R$ ${p.preco.toFixed(2)}</p>
+          <p>${p.quantidade} unidades — R$ ${p.preco.toFixed(2)}</p>
         </div>
         <div class="list-item-actions">
           <button class="btn-edit" onclick="editPlano('marmitas', '${p.id}')">Editar</button>
@@ -131,13 +130,13 @@ function loadPlanos() {
     `;
   });
 
-  html += "<h3>Sucos</h3>";
+  html += "<h3 style='color: var(--primary); margin: 20px 0 10px;'>Sucos</h3>";
   sucos.forEach(p => {
     html += `
       <div class="list-item">
         <div class="list-item-info">
           <h4>${p.nome}</h4>
-          <p>${p.quantidade} sucos — R$ ${p.preco.toFixed(2)}</p>
+          <p>${p.quantidade} unidades — R$ ${p.preco.toFixed(2)}</p>
         </div>
         <div class="list-item-actions">
           <button class="btn-edit" onclick="editPlano('sucos', '${p.id}')">Editar</button>
@@ -146,7 +145,7 @@ function loadPlanos() {
     `;
   });
 
-  html += "<h3>Combos</h3>";
+  html += "<h3 style='color: var(--primary); margin: 20px 0 10px;'>Combos</h3>";
   combos.forEach(p => {
     html += `
       <div class="list-item">
@@ -204,7 +203,7 @@ function loadMarmitas() {
         <div class="list-item-info">
           <h4>${m.nome}</h4>
           <p>${m.descricao}</p>
-          ${m.isGourmet ? `<p style="color:var(--accent);font-size:0.75rem;">+R$ ${m.preco.toFixed(2)} (Gourmet)</p>` : ""}
+          ${m.isGourmet ? `<p style="color:var(--accent);font-size:0.75rem;margin-top:4px;">+R$ ${m.preco.toFixed(2)} (Gourmet)</p>` : ""}
         </div>
         <div class="list-item-actions">
           <button class="btn-edit" onclick="openMarmitaForm('${m.id}')">Editar</button>
@@ -228,22 +227,23 @@ function openMarmitaForm(id = null) {
     document.getElementById("m-gourmet").checked = m.isGourmet;
     document.getElementById("m-preco").value = m.preco;
     document.getElementById("m-tags").value = (m.tags || []).join(", ");
-    document.querySelector("h3", form).textContent = "Editar marmita";
+    form.querySelector("h3").textContent = "Editar marmita";
   } else {
     document.getElementById("m-nome").value = "";
     document.getElementById("m-desc").value = "";
     document.getElementById("m-gourmet").checked = false;
     document.getElementById("m-preco").value = "";
     document.getElementById("m-tags").value = "";
-    document.querySelector("h3", form).textContent = "Nova marmita";
+    form.querySelector("h3").textContent = "Nova marmita";
   }
 
+  document.getElementById("m-gourmet").addEventListener("change", togglePrecoBudget);
   togglePrecoBudget();
-  form.style.display = "block";
+  form.classList.add("open");
 }
 
 function closeMarmitaForm() {
-  document.getElementById("marmiitaForm").style.display = "none";
+  document.getElementById("marmiitaForm").classList.remove("open");
   editingMarmitaId = null;
 }
 
@@ -329,7 +329,7 @@ function loadExtras() {
         <div class="list-item-info">
           <h4>${e.nome}</h4>
           <p>${e.descricao || ""}</p>
-          <p style="color:var(--primary);font-weight:600;">R$ ${e.preco.toFixed(2)}</p>
+          <p style="color:var(--primary);font-weight:600;margin-top:4px;">R$ ${e.preco.toFixed(2)}</p>
         </div>
         <div class="list-item-actions">
           <button class="btn-edit" onclick="openExtraForm('${e.id}')">Editar</button>
@@ -353,20 +353,20 @@ function openExtraForm(id = null) {
     document.getElementById("ex-desc").value = e.descricao;
     document.getElementById("ex-preco").value = e.preco;
     document.getElementById("ex-tags").value = (e.tags || []).join(", ");
-    document.querySelector("h3", form).textContent = "Editar extra";
+    form.querySelector("h3").textContent = "Editar extra";
   } else {
     document.getElementById("ex-nome").value = "";
     document.getElementById("ex-desc").value = "";
     document.getElementById("ex-preco").value = "";
     document.getElementById("ex-tags").value = "";
-    document.querySelector("h3", form).textContent = "Novo extra";
+    form.querySelector("h3").textContent = "Novo extra";
   }
 
-  form.style.display = "block";
+  form.classList.add("open");
 }
 
 function closeExtraForm() {
-  document.getElementById("extraForm").style.display = "none";
+  document.getElementById("extraForm").classList.remove("open");
   editingExtraId = null;
 }
 
