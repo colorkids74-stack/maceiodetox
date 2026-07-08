@@ -316,7 +316,7 @@
   }
 
   // -------------------------------------------------------------------
-  // navegação global
+  // navegação global - Expor funções pra chamar do HTML
   // -------------------------------------------------------------------
   window.startPlanos = function() {
     document.getElementById("hero-section").classList.remove("active");
@@ -349,6 +349,13 @@
     window.scrollTo(0, 0);
   }
 
-  // inicializar
-  init();
+  // Expor TODAS as funções como globais
+  window.init = init;
+  window.nextStep = nextStep;
+  window.goToStep = goToStep;
+
+  // ✅ INICIALIZAR AUTOMATICAMENTE QUANDO PÁGINA CARREGA
+  setTimeout(() => {
+    init();
+  }, 100);
 })();
