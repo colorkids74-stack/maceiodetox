@@ -1,0 +1,77 @@
+{
+  "loja": {
+    "nome": "Maceió Detox",
+    "slogan": "Sabor de verdade, leveza de verdade",
+    "whatsapp": "5582988067015",
+    "endereçoResumo": "Maceió, AL",
+    "horario": "Seg a Sáb · 08h às 18h"
+  },
+  "planos": {
+    "marmitas": [
+      { "id": "plan_m5", "quantidade": 5, "preco": 115.00, "nome": "Plano 5 Marmitas" },
+      { "id": "plan_m10", "quantidade": 10, "preco": 220.00, "nome": "Plano 10 Marmitas" },
+      { "id": "plan_m20", "quantidade": 20, "preco": 400.00, "nome": "Plano 20 Marmitas" }
+    ],
+    "sucos": [
+      { "id": "plan_s7", "quantidade": 7, "preco": 60.00, "nome": "7 Sucos Detox" },
+      { "id": "plan_s15", "quantidade": 15, "preco": 105.00, "nome": "15 Sucos Detox" },
+      { "id": "plan_s30", "quantidade": 30, "preco": 170.00, "nome": "30 Sucos Detox" }
+    ],
+    "combos": [
+      {
+        "id": "combo_dia",
+        "nome": "Dia Detox",
+        "descricao": "1 dia de detox",
+        "preco": 70.00,
+        "conteudo": { "sucos": 7, "aguas": 1 }
+      },
+      {
+        "id": "combo_super",
+        "nome": "Super Detox",
+        "descricao": "2 dias de detox",
+        "preco": 129.90,
+        "conteudo": { "sucos": 12, "caldos": 2, "aguas": 2 }
+      },
+      {
+        "id": "combo_mega",
+        "nome": "Mega Detox",
+        "descricao": "3 dias de detox",
+        "preco": 169.90,
+        "conteudo": { "sucos": 12, "caldos": 6, "aguas": 3 }
+      }
+    ]
+  },
+  "marmitas": {
+    "normal": [
+      { "id": "p1", "nome": "Frango Grelhado", "descricao": "Frango grelhado, arroz integral, brócolis e batata doce", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p2", "nome": "Marmita Vegana do Dia", "descricao": "Grão de bico, quinoa, legumes assados e molho tahine", "preco": 0, "foto": "", "tags": ["vegano", "fit"], "isGourmet": false },
+      { "id": "p3", "nome": "Sobrecoxa de Frango", "descricao": "Sobrecoxa de frango ao forno, molho de ervas, arroz e feijão verde", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p4", "nome": "Estrogonofe de Carne", "descricao": "Estrogonofe de carne com arroz integral e mix de legumes", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p5", "nome": "Moqueca de Peixe", "descricao": "Moqueca de peixe branco, arroz e banana da terra", "preco": 0, "foto": "", "tags": [], "isGourmet": false },
+      { "id": "p6", "nome": "Filé de Tilápia", "descricao": "Filé de tilápia com arroz integral e cenoura", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p7", "nome": "Carne Moída Integral", "descricao": "Carne moída, arroz integral, feijão e legumes", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p8", "nome": "Frango com Brócolis", "descricao": "Frango desfiado, brócolis ao alho, batata doce e arroz", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p9", "nome": "Tomate Recheado", "descricao": "Tomate recheado com carne magra, arroz integral", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p10", "nome": "Frango à Parmegiana", "descricao": "Frango à parmegiana light, batata doce assada", "preco": 0, "foto": "", "tags": ["fit"], "isGourmet": false },
+      { "id": "p11", "nome": "Bobó de Camarão FIT", "descricao": "Bobó de camarão light, arroz integral", "preco": 15.00, "foto": "", "tags": ["fit"], "isGourmet": true },
+      { "id": "p12", "nome": "Salmão ao Forno", "descricao": "Salmão ao forno com legumes e batata doce", "preco": 12.00, "foto": "", "tags": ["fit"], "isGourmet": true }
+    ]
+  },
+  "extras": {
+    "sucos": [
+      { "id": "e1", "nome": "Suco Verde Detox", "descricao": "Couve, limão, gengibre, maçã verde e água de coco", "preco": 12.90, "foto": "", "tags": ["vegano"] },
+      { "id": "e2", "nome": "Vitamina de Maracujá", "descricao": "Maracujá, banana, aveia e leite de amêndoas", "preco": 13.90, "foto": "", "tags": ["vegetariano"] },
+      { "id": "e3", "nome": "Água Detox", "descricao": "Água detox com frutas e ervas", "preco": 8.00, "foto": "", "tags": ["vegano"] },
+      { "id": "e4", "nome": "Suco de Laranja", "descricao": "Suco natural de laranja", "preco": 10.00, "foto": "", "tags": ["vegano"] },
+      { "id": "e5", "nome": "Smoothie Bowl", "descricao": "Smoothie com frutas e granola", "preco": 16.00, "foto": "", "tags": ["vegano"] },
+      { "id": "e6", "nome": "Chá Gelado", "descricao": "Chá gelado natural", "preco": 9.00, "foto": "", "tags": ["vegano"] },
+      { "id": "e7", "nome": "Suco de Beterraba", "descricao": "Suco de beterraba com cenoura", "preco": 11.00, "foto": "", "tags": ["vegano"] },
+      { "id": "e8", "nome": "Vitamina de Banana", "descricao": "Vitamina de banana com mel", "preco": 12.00, "foto": "", "tags": ["vegetariano"] },
+      { "id": "e9", "nome": "Suco Misto", "descricao": "Mix de frutas e vegetais", "preco": 13.00, "foto": "", "tags": ["vegano"] }
+    ],
+    "sobremesas": [
+      { "id": "e10", "nome": "Mousse de Cacau 70%", "descricao": "Mousse de cacau com abacate, adoçado com tâmaras", "preco": 11.90, "foto": "", "tags": ["vegano"] },
+      { "id": "e11", "nome": "Pudim de Chia com Frutas", "descricao": "Chia hidratada no leite de coco com frutas vermelhas", "preco": 12.90, "foto": "", "tags": ["vegano"] }
+    ]
+  }
+}
